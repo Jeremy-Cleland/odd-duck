@@ -2,27 +2,26 @@ h1 {
   font-family: 'MuseoModerno', cursive;
 }
 
-#img-container {
-  width: 90%;
-  margin: auto;
-  display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(200px, auto);
-  /* row-gap: 30px;
-    column-gap: 30px; */
-  gap: 30px;
+
+#product-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  height: 100vh;
 }
 
-#img-one {
-  grid-column: 1/3;
 
+#product-gallery>li {
+  flex-basis: 350px;
+  flex-grow: 1;
+  /* width: 350px; */
 }
 
-#img-two {
-  grid-column: 2/3;
-}
-
-#img-three {
-  grid-column: 3/3;
+#product-gallery li img {
+  object-fit: cover;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-radius: 5px;
 }
