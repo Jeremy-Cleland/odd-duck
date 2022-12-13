@@ -1,7 +1,7 @@
 h1 {
   font-family: 'MuseoModerno', cursive;
+  font-size: 2rem;
 }
-
 
 #product-gallery {
   display: flex;
@@ -11,11 +11,9 @@ h1 {
   height: 100vh;
 }
 
-
 #product-gallery>li {
   flex-basis: 350px;
   flex-grow: 1;
-  /* width: 350px; */
 }
 
 #product-gallery li img {
