@@ -7,3 +7,4 @@ logs
 
 # Optional eslint cache
 .eslintcache
+css/style.css
