@@ -1,25 +1,71 @@
+body {
+  background-color: #303030;
+  font-family: 'Gloria Hallelujah', cursive;
+  line-height: 1.75em;
+  font-size: 16px;
+  background-color: #222;
+  color: #aaa;
+  height: 120vw;
+}
+
+p {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 25px;
+}
+
 h1 {
-  font-family: 'MuseoModerno', cursive;
-  font-size: 2rem;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 60px;
+  line-height: 34px;
+  padding: 50px;
+  text-align: center;
+  background-color: #444;
+  color: #222;
+  text-shadow: 5px 5px 5px #0c0c0c;
+  /* width and color */
+  -webkit-text-stroke: 1px #fff;
 }
 
 #product-gallery {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  height: 100vh;
-}
-
-#product-gallery>li {
-  flex-basis: 350px;
-  flex-grow: 1;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #product-gallery li img {
-  object-fit: cover;
-  max-width: 100%;
-  height: auto;
+  height: 300px;
+  width: 300px;
+  object-fit: fill;
   vertical-align: middle;
-  border-radius: 5px;
+  border-radius: 20px;
+  /* box-shadow: 5px 5px 15px #222; */
+
+}
+
+#product-gallery li img:hover {
+  box-shadow: 3px 3px 5px rgba(0.3, .3, .3, 0.12);
+  -webkit-box-shadow: 0px 0px 108px -8px rgba(0.3, .3, .3, 0.12);
+  -moz-box-shadow: 0px 0px 108px -8px rgba(0.3, .3, .3, 0.12);
+  /* border: 5px solid #222; */
+
+}
+
+canvas {
+  align-items: center;
+  margin: 1rem 15rem;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+canvas:hover {
+  box-shadow: 3px 3px 5px rgba(0.3, .3, .3, 0.12);
+  -webkit-box-shadow: 0px 0px 108px -8px rgba(0.3, .3, .3, 0.12);
+  -moz-box-shadow: 0px 0px 108px -8px rgba(0.3, .3, .3, 0.12);
+  /* border: 5px solid #222; */
 }
