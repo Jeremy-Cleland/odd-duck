@@ -4,6 +4,7 @@
 // ******* GLOBALS *******
 let productArray = [];
 let votingRounds = 15;
+let uniqueImageCount = 6;
 
 //  ****** DOM WINDOWS *******
 
@@ -35,6 +36,12 @@ function renderImg() {
   let imgTwoIndex = randomIndex();
   let imgThreeIndex = randomIndex();
 
+  // while (indexArray.length < uniqueImageCount) {
+  //   let randomNumber = getRandomNumber();
+  //   if (!indexArray.includes(randomNumber)) {
+  //     indexArray.push(randomNumber);
+  //   }
+  // }
   while (imgOneIndex === imgTwoIndex |imgTwoIndex === imgThreeIndex || imgOneIndex === imgThreeIndex) {
     if (imgOneIndex === imgTwoIndex) {
       imgTwoIndex = randomIndex();
@@ -62,6 +69,35 @@ function renderImg() {
   productArray[imgThreeIndex].views++;
 
 }
+// **** RENDER CHART *****
+
+// TODO: Use Chart constructor - pass in cavnvas elem. and my chartOj with all my product data
+
+// function renderChart() {
+//   let productNames = [];
+//   let productLikes = [];
+//   let productViews = [];
+
+//   for (let i = 0; i < productArray.length; i++) {
+//     productNames.push(productArray[i].name);
+//     productNames.push(productArray[i].votes);
+
+//   }
+//   const data = {
+//     labels: productNames,
+//     datasets: [{
+//       label: 'Likes',
+//       data: productLikes,
+//       backgroundColor: [
+//         'rgba(255, 99, 132, 0.2)'
+//       ],
+//       borderColor: [
+//         'rgb(255, 99, 132)'
+//       ],
+//       borderWidth: 1
+//     }]
+//   };
+// }
 
 // **** EVENT HANDLERS *****
 
