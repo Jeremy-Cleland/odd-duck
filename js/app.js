@@ -1,17 +1,18 @@
 'use strict';
 
-// ******* GLOBALS *******
+// $ ************ GLOBALS ************
+
 let productArray = [];
 let votingRounds = 25;
 
-//  ****** DOM WINDOWS *******
+// $ *********** DOM WINDOWS ************
 
 let imgContainer = document.getElementById('img-container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
 
-// ***** CONSTRUCTOR FUNCTION ******
+// $ ***** CONSTRUCTOR FUNCTION ******
 
 function Product(name, imgExtension = 'jpg') {
   this.name = name;
@@ -24,7 +25,8 @@ function Product(name, imgExtension = 'jpg') {
 
 Product.productArray = [];
 
-// ***** HELPER FUNCTIONS / UTILITIES *****
+// $ ***** HELPER FUNCTIONS / UTILITIES *****
+
 function randomIndex() {
   return Math.floor(Math.random() * productArray.length);
 }
@@ -44,26 +46,24 @@ function renderImg() {
   let imgTwoIndex = indexArray.shift();
   let imgThreeIndex = indexArray.shift();
 
-  // Product 1
   imgOne.src = productArray[imgOneIndex].img;
   imgOne.title = productArray[imgOneIndex].name;
   imgOne.alt = `This is an image of ${productArray[imgOneIndex].name}`;
-  // Product 2
+
   imgTwo.src = productArray[imgTwoIndex].img;
   imgTwo.title = productArray[imgTwoIndex].name;
   imgOne.alt = `This is an image of ${productArray[imgTwoIndex].name}`;
-  // Product 3
+
   imgThree.src = productArray[imgThreeIndex].img;
   imgThree.title = productArray[imgThreeIndex].name;
   imgOne.alt = `This is an image of ${productArray[imgThreeIndex].name}`;
-  // Views
+
   productArray[imgOneIndex].views++;
   productArray[imgTwoIndex].views++;
   productArray[imgThreeIndex].views++;
-
 }
 
-// **** EVENT HANDLERS *****
+// $ ********* EVENT HANDLERS **********
 
 function handleClick(event) {
   let imgClicked = event.target.title;
@@ -81,10 +81,21 @@ function handleClick(event) {
   if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleClick);
     renderChart();
+
+    // $ ********** LOCAL STORAGE STARTS HERE **********
+
+    let stringifiedProducts = JSON.stringify(productArray)
+
+    localStorage.setItem('myProducts', stringifiedProducts);
   }
 }
 
-// **** RENDER CHART *****
+let retrievedProducts = localStorage.getItem('myProducts');
+
+let parsedProducts = JSON.parse(retrievedProducts);
+
+
+// $ ************ RENDER CHART ************ //
 
 function renderChart() {
   let productNames = [];
@@ -102,21 +113,27 @@ function renderChart() {
       label: 'Likes',
       data: productVotes,
       backgroundColor: [
-        'hsl(11, 52%, 45%)'
+        '#7b7b7b'
+      ],
+      hoverBorderColor: [
+        '#FF7043'
       ],
       borderColor: [
-        'rgb(0, 0, 0)'
+        'rgb(0, 0, 0, 0.13)'
       ],
-      borderWidth: 4
+      borderWidth: 2
     },
     {
       label: 'Views',
       data: productViews,
       backgroundColor: [
-        'rgb(243, 251, 151)'
+        '#e5e5e5'
+      ],
+      hoverBorderColor: [
+        '#FF7043'
       ],
       borderColor: [
-        'rgb(255, 159, 64)'
+        'rgb(0, 0, 0, 0.13)'
       ],
       borderWidth: 2
     }]
@@ -137,31 +154,45 @@ function renderChart() {
   const myChart = new Chart(canvasChart, config);
 }
 
-// **** EXECUTABLE CODE *****
+// $ ********* EXECUTABLE CODE **********
 
-const bag = new Product('bag');
-const banana = new Product('banana');
-const bathroom = new Product('bathroom');
-const boots = new Product('boots');
-const breakfast = new Product('breakfast');
-const bubblegum = new Product('bubblegum');
-const chair = new Product('chair');
-const cthulhu = new Product('cthulhu');
-const dogDuck = new Product('dog-duck');
-const dragon = new Product('dragon');
-const pen = new Product('pen');
-const petSweep = new Product('pet-sweep', 'png');
-const scissors = new Product('scissors');
-const shark = new Product('shark');
-const tauntaun = new Product('tauntaun');
-const unicorn = new Product('unicorn');
-const waterCan = new Product('water-can');
-const wineGlass = new Product('wine-glass');
+if (retrievedProducts) {
+  for (let i = 0; i < parsedProducts.length; i++) {
+    if (parsedProducts[i].name === 'sweep') {
+      let reconstructedSweep = new Product(parsedProducts[i].name, 'png');
+      reconstructedSweep.views = parsedProducts[i].views;
+      reconstructedSweep.votes = parsedProducts[i].votes;
+      productArray.push(reconstructedSweep);
+    } else {
+      let reconstructedProduct = new Product(parsedProducts[i].name);
+      reconstructedProduct.views = parsedProducts[i].views;
+      reconstructedProduct.votes = parsedProducts[i].votes;
+      productArray.push(reconstructedProduct);
+    }
+  }
+} else {
+  const bag = new Product('bag');
+  const banana = new Product('banana');
+  const bathroom = new Product('bathroom');
+  const boots = new Product('boots');
+  const breakfast = new Product('breakfast');
+  const bubblegum = new Product('bubblegum');
+  const chair = new Product('chair');
+  const cthulhu = new Product('cthulhu');
+  const dogDuck = new Product('dog-duck');
+  const dragon = new Product('dragon');
+  const pen = new Product('pen');
+  const petSweep = new Product('pet-sweep');
+  const scissors = new Product('scissors');
+  const shark = new Product('shark');
+  const sweep = new Product('sweep', 'png');
+  const tauntaun = new Product('tauntaun');
+  const unicorn = new Product('unicorn');
+  const waterCan = new Product('water-can');
+  const wineGlass = new Product('wine-glass');
 
-productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, tauntaun, unicorn, waterCan, wineGlass);
+  productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, tauntaun, unicorn, waterCan, wineGlass);
+}
 
 renderImg();
-
 imgContainer.addEventListener('click', handleClick);
-
-console.log(productArray);
